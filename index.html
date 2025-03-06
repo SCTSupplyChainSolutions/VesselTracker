@@ -1,45 +1,45 @@
-<script type="text/javascript">
-    // Function to get the IMO from the URL
-    function getIMOFromURL() {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('imo');  // Extract 'imo' parameter from the URL
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Tracker</title>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100vh;"></div>
 
-    // Initialize the vessel map
-    function initializeMap() {
-        var imo = getIMOFromURL(); // Get the IMO from the URL query parameter
-        
-        if (imo) {
-            // If the IMO is found, initialize the map and track the vessel
-            console.log("Tracking vessel with IMO:", imo);
-                
-            // Dynamically create the script element to load the map
-            var script = document.createElement("script");
-            script.src = "https://www.vesselfinder.com/aismap.js";
-            document.head.appendChild(script);
-
-            // After the script loads, initialize the vessel tracker with the dynamic IMO
-            script.onload = function() {
-                // Map appearance settings
-                var width = "100%";
-                var height = "600";
-                var latitude = "0.00";  // Placeholder latitude (you can update this if needed)
-                var longitude = "0.00"; // Placeholder longitude (you can update this if needed)
-                var zoom = "3";         // Default zoom level
-                var names = true;       // Show ship names by default
-                
-                // Single ship tracking using dynamic IMO value
-                var imoToTrack = imo;  // Use the dynamic IMO passed in the URL
-                var show_track = true; // Show track for the last 24 hours
-
-                // Call the tracking function from the VesselFinder API
-                window.vf_track(imoToTrack, names, show_track);
-            };
-        } else {
-            alert("IMO parameter is missing from the URL.");
+    <script type="text/javascript">
+        // Function to get the IMO from the URL
+        function getIMOFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('imo');  // Extract 'imo' parameter from the URL
         }
-    }
 
-    // Initialize the map when the page loads
-    window.onload = initializeMap;
-</script>
+        // Initialize the vessel map
+        function initializeMap() {
+            var imo = getIMOFromURL(); // Get the IMO from the URL query parameter
+            
+            if (imo) {
+                // If the IMO is found, initialize the map and track the vessel
+                console.log("Tracking vessel with IMO:", imo);
+                
+                // Dynamically create the script element to load the map
+                var script = document.createElement("script");
+                script.src = "https://www.vesselfinder.com/aismap.js";
+                document.head.appendChild(script);
+
+                // After the script loads, initialize the vessel tracker with the dynamic IMO
+                script.onload = function() {
+                    // Ensure the map is correctly initialized with the dynamic IMO
+                    vf_track(imo, true, true);  // Track the vessel with the dynamic IMO value
+                };
+            } else {
+                alert("IMO parameter is missing from the URL.");
+            }
+        }
+
+        // Initialize the map when the page loads
+        window.onload = initializeMap;
+    </script>
+</body>
+</html>
