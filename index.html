@@ -3,63 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ship Tracker</title>
-    <style>
-        /* Ensure that the body and html take up the full screen */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-
-        /* Map container should occupy 100% of the width and dynamic height */
-        #map {
-            width: 100%;
-            height: 100%; /* Adjust dynamically with JavaScript */
-        }
-    </style>
+    <title>Vessel Tracker</title>
 </head>
 <body>
-    <!-- Map container -->
-    <div id="map"></div>
+    <h1>Vessel Tracking</h1>
+    <div id="map" style="width: 100%; height: 100vh;"></div>
 
     <script type="text/javascript">
-        // Function to update the height based on the window size
-        function updateMapHeight() {
-            var mapElement = document.getElementById('map');
-            mapElement.style.height = window.innerHeight + 'px'; // Dynamically set the height
+        // Function to get the IMO from the URL
+        function getIMOFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('imo');  // Return the IMO parameter
         }
 
-        // Initial map height update
-        window.onload = function() {
-            updateMapHeight(); // Set the height based on window size on page load
-            // Initialize the map with the settings
-            initMap();
-        };
+        // Function to initialize the map
+        function initializeMap() {
+            var imo = getIMOFromURL(); // Get IMO from URL query parameter
+            
+            if (imo) {
+                // You can use this IMO to call a vessel tracking API or set up custom behavior
+                // For example, using the VesselFinder API or similar.
+                console.log("Tracking vessel with IMO:", imo);
+                
+                // Add your script for vessel tracking here, passing the IMO
+                var script = document.createElement("script");
+                script.src = "https://www.vesselfinder.com/aismap.js";
+                document.head.appendChild(script);
+                
+                // Use the IMO in your tracker setup here (if applicable)
+                script.onload = function() {
+                    // Map appearance configuration
+                    var width = "100%";
+                    var height = "100%";  // Will be adjusted dynamically
+                    var latitude = "0.00";
+                    var longitude = "0.00";
+                    var zoom = "3";
+                    var names = false;
 
-        // Update the map height when the window is resized
-        window.onresize = updateMapHeight;
+                    // Single ship tracking
+                    var mmsi = "";          // Not used if using IMO
+                    var imo = imo;         // Use the dynamic IMO
+                    var show_track = true; // Option to show the track
 
-        // Map appearance settings
-        var width = "100%";
-        var height = "100%"; // Will be adjusted dynamically
-        var names = true;
-
-        // Single ship tracking settings
-        var imo = "9506291"; // IMO of the ship you want to track
-        var show_track = true; // Show the track line for the last 24 hours
-
-        // Initialize the VesselFinder map
-        function initMap() {
-            // Dynamically load the external map script
-            var script = document.createElement("script");
-            script.src = "https://www.vesselfinder.com/aismap.js"; // Load the map script
-            script.onload = function() {
-                // When the script loads, adjust the map's height if required
-                updateMapHeight();
-            };
-            document.body.appendChild(script);
+                    // Fleet tracking (optional)
+                    var fleet = "e48ab3d80a0e2a9bf28930f2dd08800c"; // Your fleet key
+                    var fleet_name = "Carnival";                   // Fleet name
+                    var fleet_timespan = "1440";                   // Maximum age in minutes for ship positions
+                    
+                    // This will initialize the map with the IMO dynamically
+                    initializeVesselFinderMap(imo, names, show_track);
+                };
+            } else {
+                alert("IMO parameter is missing from the URL.");
+            }
         }
+
+        // Function to initialize VesselFinder map
+        function initializeVesselFinderMap(imo, names, show_track) {
+            // Logic to initialize VesselFinder map using the provided IMO
+            window.vf_track(imo, names, show_track);  // This calls the function that uses the imo value
+        }
+
+        // Initialize the map after the page is loaded
+        window.onload = initializeMap;
     </script>
 </body>
 </html>
