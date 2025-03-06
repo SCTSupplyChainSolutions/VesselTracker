@@ -9,9 +9,9 @@
         function searchVessel() {
             var imo = document.getElementById("vesselIMO").value;  // Get the IMO value from input
             if (imo) {
-                // Set the iframe source to the VesselFinder URL with the entered IMO number
+                // Set the iframe source to the VesselFinder URL with the entered IMO number and versioning query parameter
                 var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
                 iframe.style.display = "block";  // Make the VesselFinder iframe visible
             } else {
                 alert("Please enter a valid IMO number.");
@@ -114,4 +114,3 @@
 
 </body>
 </html>
-
