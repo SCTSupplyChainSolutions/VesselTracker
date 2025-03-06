@@ -18,13 +18,17 @@
         }
     </script>
     <style>
-        /* Position logo in the top-right corner */
+        /* Ensure the logo stays in the top-right corner */
+        body {
+            position: relative; /* Allow absolute positioning within body */
+        }
         .logo {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 20px;  /* Adjust the top position */
+            right: 20px;  /* Adjust the right position */
             width: 150px;  /* Adjust the width as needed */
             height: auto;
+            z-index: 9999;  /* Ensure the logo is always on top */
         }
     </style>
 </head>
@@ -34,4 +38,18 @@
 
     <!-- SCT Logo in the top-right corner -->
     <img src="https://github.com/SCTSupplyChainSolutions/ShipTracker/blob/main/SCT%20Logo.jpg?raw=true" 
-         alt="SCT Logo
+         alt="SCT Logo" 
+         class="logo">
+
+    <!-- Search input box for IMO -->
+    <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
+    <button onclick="searchVessel()">Search</button>
+
+    <!-- Message for user -->
+    <p>Once you enter the IMO number, the vessel's tracking map will appear:</p>
+
+    <!-- iframe for the map (initially empty) -->
+    <iframe id="vesselMap" style="width: 100%; height: 600px; border: none;" src="" frameborder="0"></iframe>
+</body>
+</html>
+
