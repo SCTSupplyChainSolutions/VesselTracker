@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vessel Finder Tracker</title>
+    <title>Vessel Finder Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 80vh; /* Full-screen map height */
+            border: 1px solid #ddd;
+        }
+        input, button {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+
     <h1>Track a Vessel</h1>
     
     <!-- Input for Vessel Name or IMO -->
@@ -13,7 +33,7 @@
     <button onclick="trackVessel()">Track Vessel</button>
     
     <!-- Map container -->
-    <div id="map" style="width: 100%; height: 100vh;"></div>
+    <div id="map"></div>
 
     <script type="text/javascript">
         // Function to load the VesselFinder map script dynamically
@@ -24,35 +44,37 @@
             document.head.appendChild(script);
         }
 
-        // Function to track the vessel by either name or IMO
+        // Function to initialize the VesselFinder map
+        function initializeMap() {
+            // Initialize the map with default settings
+            window.vf_track = function () { 
+                console.log("Initializing vessel map..."); 
+            };
+        }
+
+        // Function to track the vessel by name or IMO
         function trackVessel() {
             var vesselInput = document.getElementById('vessel-input').value.trim();
             
             if (vesselInput) {
-                // Check if the input is a valid IMO (numeric and 7-9 digits)
-                var imoRegex = /^[0-9]{7,9}$/;
-                var isIMO = imoRegex.test(vesselInput);
+                // Clear the map before tracking a new vessel
+                document.getElementById('map').innerHTML = '';
 
                 // Load the VesselFinder map script and track the vessel
-                loadScript("https://www.vesselfinder.com/aismap.js", function() {
-                    if (window.vf_track) {
-                        if (isIMO) {
-                            // Track by IMO
-                            window.vf_track(vesselInput, true, true);
-                            console.log("Tracking vessel with IMO:", vesselInput);
-                        } else {
-                            // Track by name
-                            window.vf_track_by_name(vesselInput, true, true);
-                            console.log("Tracking vessel with name:", vesselInput);
-                        }
-                    } else {
-                        console.error("vf_track function not available.");
-                    }
+                loadScript("https://www.vesselfinder.com/aismap.js", function () {
+                    window.vf_track(vesselInput, true, true);
+                    console.log("Tracking vessel:", vesselInput);
                 });
             } else {
                 alert("Please enter a vessel name or IMO.");
             }
         }
+
+        // Initialize the map when the page loads
+        window.onload = initializeMap;
+
     </script>
+
 </body>
 </html>
+
