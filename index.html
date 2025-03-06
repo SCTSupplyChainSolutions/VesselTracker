@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VesselFinder Vessel Search</title>
+    <title>Vessel Finder</title>
     <script type="text/javascript">
-        // This will load the default map initially
+        // Function to load the default map when the page first loads
         window.onload = function() {
             var iframe = document.getElementById("vesselMap");
-            iframe.src = "https://www.vesselfinder.com/aismap";  // Load default map initially
+            iframe.src = "https://www.vesselfinder.com/aismap";  // Load default map with no specific vessel
         };
 
-        // Function to load the map based on the IMO entered
+        // Function to search for a vessel by IMO number
         function loadMap() {
             var imo = document.getElementById("vesselIMO").value;  // Get IMO number from input field
             if (imo) {
                 var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;  // Update iframe with the vessel's IMO
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;  // Update iframe with the IMO number map
             } else {
                 alert("Please enter a valid IMO number.");
             }
@@ -24,15 +24,16 @@
     </script>
 </head>
 <body>
-    <h1>Search Vessel on VesselFinder</h1>
+    <h1>Vessel Finder</h1>
     <p>Enter the IMO number of the vessel you want to track:</p>
 
-    <!-- Simple form to input IMO number -->
+    <!-- Simple input form to enter IMO number -->
     <input type="text" id="vesselIMO" placeholder="Enter IMO number">
     <button onclick="loadMap()">Search</button>
 
     <br><br>
-    <!-- Initially load default map without any IMO -->
+
+    <!-- Initially load the default map (empty map or a general view) -->
     <iframe id="vesselMap" src="" width="100%" height="600" style="border:none;"></iframe>
 
 </body>
