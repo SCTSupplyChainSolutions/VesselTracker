@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to redirect to the VesselFinder page when an IMO is entered
+        // Function to redirect to the VesselFinder page when a vessel name is entered
         function searchVessel() {
-            var imo = document.getElementById("vesselIMO").value;  // Get the IMO value from input
-            if (imo) {
-                // Redirect to VesselFinder with the entered IMO number
-                window.location.href = "https://www.vesselfinder.com/aismap?imo=" + imo;
+            var vesselName = document.getElementById("vesselName").value;  // Get the vessel name value from input
+            if (vesselName) {
+                // Redirect to VesselFinder with the entered vessel name
+                window.location.href = "https://www.vesselfinder.com/vessels?name=" + vesselName;
             } else {
-                alert("Please enter a valid IMO number.");
+                alert("Please enter a valid vessel name.");
             }
         }
     </script>
 </head>
 <body>
     <h1>Vessel Tracker</h1>
-    <p>Please enter the IMO number of the vessel you wish to track:</p>
+    <p>Please enter the name of the vessel you wish to track:</p>
 
-    <!-- Search input box for IMO -->
-    <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
+    <!-- Search input box for Vessel Name -->
+    <input type="text" id="vesselName" placeholder="Enter Vessel Name" />
     <button onclick="searchVessel()">Search</button>
 
     <!-- Message for user -->
-    <p>Once you enter the IMO number, you will be redirected to the vessel's tracking page.</p>
+    <p>Once you enter the vessel name, you will be redirected to the vessel's tracking page.</p>
 </body>
 </html>
+
