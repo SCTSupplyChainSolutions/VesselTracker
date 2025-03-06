@@ -1,67 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vessel Finder</title>
-    <style>
-        /* Ensure the map takes up the full height of the page */
-        #map {
-            width: 100%;
-            height: 80vh; /* Full-screen height */
-            border: 1px solid #ddd;
-        }
-
-        #vessel-input {
-            margin: 20px;
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-        }
-
-        #search-button {
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vessel Tracker</title>
 </head>
 <body>
+  <!-- Dynamic IMO Input Field -->
+  <label for="imoInput">Enter IMO:</label>
+  <input type="text" id="imoInput" placeholder="Enter IMO Number" oninput="updateIframe()">
+  
+  <!-- iFrame for VesselFinder Map -->
+  <iframe id="vesselMap" 
+          width="100%" 
+          height="600px" 
+          style="border:none;">
+  </iframe>
 
-    <h1>Vessel Finder</h1>
-
-    <!-- Input for Vessel Name or IMO -->
-    <input type="text" id="vessel-input" placeholder="Enter Vessel Name or IMO" />
-    <button id="search-button" onclick="trackVessel()">Track Vessel</button>
-
-    <!-- Map container (iframe will be injected here) -->
-    <div id="map"></div>
-
-    <!-- Embed the VesselFinder script -->
-    <script type="text/javascript">
-        function trackVessel() {
-            var vesselInput = document.getElementById('vessel-input').value.trim();
-
-            if (vesselInput) {
-                // Generate the dynamic iframe URL based on the input
-                var iframeURL = "https://www.vesselfinder.com/vessels/" + encodeURIComponent(vesselInput) + "/map";
-
-                // Inject the iframe dynamically into the map div
-                var iframe = document.createElement('iframe');
-                iframe.src = iframeURL;
-                iframe.style.width = "100%";
-                iframe.style.height = "100%";
-                iframe.frameBorder = "0";
-                iframe.allowFullscreen = true;
-
-                // Clear the previous map and add the new iframe
-                document.getElementById('map').innerHTML = '';
-                document.getElementById('map').appendChild(iframe);
-            } else {
-                alert("Please enter a vessel name or IMO.");
-            }
-        }
-    </script>
-
+  <script type="text/javascript">
+    function updateIframe() {
+      var imo = document.getElementById("imoInput").value;
+      
+      // If the IMO input is not empty, update the iframe source URL
+      if(imo) {
+        document.getElementById("vesselMap").src = "https://www.vesselfinder.com/vessels?imo=" + imo;
+      }
+    }
+  </script>
 </body>
 </html>
