@@ -22,6 +22,7 @@
         body {
             position: relative; /* Allow absolute positioning within body */
             padding-top: 60px;  /* Add some space at the top to avoid overlap */
+            font-family: Arial, sans-serif;  /* Optional: for better text font */
         }
         .logo {
             position: absolute;
@@ -33,6 +34,15 @@
         }
         h1, p {
             margin: 20px;
+            text-align: left; /* Align text to the left */
+        }
+        .container {
+            padding: 20px;  /* Padding for the form and map section */
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         iframe {
             width: 100%;
@@ -47,17 +57,21 @@
          alt="SCT Logo" 
          class="logo">
 
-    <h1>SCT Vessel Tracker</h1>
-    <p>Please enter the IMO number of the vessel you wish to track:</p>
+    <div class="container">
+        <h1>SCT Vessel Tracker</h1>
+        <p>Please enter the IMO number of the vessel you wish to track:</p>
 
-    <!-- Search input box for IMO -->
-    <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
-    <button onclick="searchVessel()">Search</button>
+        <!-- Search input box for IMO -->
+        <div class="input-container">
+            <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
+            <button onclick="searchVessel()">Search</button>
+        </div>
 
-    <!-- Message for user -->
-    <p>Once you enter the IMO number, the vessel's tracking map will appear:</p>
+        <!-- Message for user -->
+        <p>Once you enter the IMO number, the vessel's tracking map will appear:</p>
 
-    <!-- iframe for the map (initially empty) -->
-    <iframe id="vesselMap" src="" frameborder="0"></iframe>
-</body
-
+        <!-- iframe for the map (initially empty) -->
+        <iframe id="vesselMap" src="" frameborder="0"></iframe>
+    </div>
+</body>
+</html>
