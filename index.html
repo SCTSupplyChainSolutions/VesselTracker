@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarineTraffic Embed</title>
-</head>
-<body>
-    <h1>MarineTraffic Vessel Tracker</h1>
-    <p>Track a vessel using the MarineTraffic embedded map:</p>
-
-    <!-- Embed the MarineTraffic map -->
-    <iframe src="https://www.marinetraffic.com/en/ais/details/ships/IMO:9506291" width="100%" height="600" frameborder="0" allowfullscreen></iframe>
-
-</body>
-</html>
+<script type="text/javascript">
+	width='100%';		// the width of the embedded map in pixels or percentage
+	height='450';		// the height of the embedded map in pixels or percentage
+	border='1';		// the width of the border around the map (zero means no border)
+	shownames='false';	// to display ship names on the map (true or false)
+	latitude='37.4460';	// the latitude of the center of the map, in decimal degrees
+	longitude='24.9467';	// the longitude of the center of the map, in decimal degrees
+	zoom='9';		// the zoom level of the map (values between 2 and 17)
+	maptype='1';		// use 0 for Normal Map, 1 for Satellite
+	trackvessel='0';	// MMSI of a vessel (note: vessel will be displayed only if within range of the system) - overrides "zoom" option
+	fleet='';		// the registered email address of a user-defined fleet (user's default fleet is used)
+</script>
+<script type="text/javascript" src="https://www.marinetraffic.com/js/embed.js"></script>;
