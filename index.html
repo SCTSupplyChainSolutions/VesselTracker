@@ -34,61 +34,61 @@
     <style>
         /* General styling */
         body {
-            font-family: 'Montserrat', sans-serif; /* Changed font family to Montserrat */
-            color: #333; /* Dark grey font color */
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
             margin: 10;
-            padding: 20px; /* Added small padding around the body */
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
 
         p {
-            margin-top: 10px; /* Reduced top margin to reduce padding between text and top */
+            margin-top: 10px;
             text-align: left;
         }
 
         .search-bar-container {
             display: flex;
             align-items: center;
-            margin-top: 15px; /* Consistent gap from previous elements */
+            margin-top: 15px;
         }
 
         .search-bar-container input[type="text"] {
-            padding: 5px 10px; /* Consistent padding for better visuals */
+            padding: 5px 10px;
             width: 250px;
-            font-size: 14px; /* Smaller font size */
-            height: 30px; /* Set height to 30px */
-            margin-right: 10px; /* Space between input and button */
+            font-size: 14px;
+            height: 30px;
+            margin-right: 10px;
         }
 
         .search-bar-container button {
             padding: 5px 10px;
             font-size: 14px;
             cursor: pointer;
-            height: 30px; /* Set height to 30px, same as input */
-            width: 80px; /* Adjust button width */
+            height: 30px;
+            width: 80px;
         }
 
         iframe {
             width: 100%;
             border: none;
-            margin-top: 20px; /* Consistent margin below the search box */
+            margin-top: 20px;
         }
 
         /* Specific iframe settings */
         #vesselMap {
-            height: 400px; /* Set height for VesselFinder iframe */
-            display: block; /* Always show the VesselFinder iframe */
-            src: "https://www.vesselfinder.com/aismap?v=1";
+            height: 400px;
+            display: block;
+            src: "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-30.5595&lon=22.9375"; /* Centered over South Africa */
         }
 
         /* Logo styling */
         .logo {
-            position: fixed;  /* Ensure the logo is fixed in the top-right corner */
+            position: fixed;
             top: 20px;
             right: 20px;
-            width: 140px;  /* Adjusted logo size */
+            width: 140px;
             height: 115;
             z-index: 9999;
         }
@@ -110,7 +110,7 @@
     </div>
 
     <!-- iframe for the VesselFinder map (visible by default) -->
-    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1" frameborder="0"></iframe>
+    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-30.5595&lon=22.9375" frameborder="0"></iframe>
 
 </body>
 </html>
