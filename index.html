@@ -8,22 +8,25 @@
 <body>
   <!-- Dynamic IMO Input Field -->
   <label for="imoInput">Enter IMO:</label>
-  <input type="text" id="imoInput" placeholder="Enter IMO Number" oninput="updateIframe()">
-  
-  <!-- iFrame for VesselFinder Map -->
-  <iframe id="vesselMap" 
-          width="100%" 
-          height="600px" 
-          style="border:none;">
-  </iframe>
+  <input type="text" id="imoInput" placeholder="Enter IMO Number" oninput="updateMap()">
+
+  <!-- Embed VesselFinder Map -->
+  <div id="map-container" style="width: 100%; height: 600px;"></div>
 
   <script type="text/javascript">
-    function updateIframe() {
+    // Function to update the Vessel Finder Map
+    function updateMap() {
       var imo = document.getElementById("imoInput").value;
-      
-      // If the IMO input is not empty, update the iframe source URL
-      if(imo) {
-        document.getElementById("vesselMap").src = "https://www.vesselfinder.com/vessels?imo=" + imo;
+
+      // If the IMO is provided, update the map with the specific vessel
+      if (imo) {
+        var script = document.createElement('script');
+        script.src = `https://www.vesselfinder.com/aismap.js?imo=${imo}`;
+        script.onload = function() {
+          vf_track(imo);  // Execute the tracking function
+        };
+        document.getElementById("map-container").innerHTML = '';  // Clear previous map
+        document.getElementById("map-container").appendChild(script);
       }
     }
   </script>
