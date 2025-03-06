@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VesselFinder Vessel Search</title>
     <script type="text/javascript">
-        // This will load the map once the page is ready
+        // This will load the default map initially
+        window.onload = function() {
+            var iframe = document.getElementById("vesselMap");
+            iframe.src = "https://www.vesselfinder.com/aismap";  // Load default map initially
+        };
+
+        // Function to load the map based on the IMO entered
         function loadMap() {
-            var imo = document.getElementById("vesselIMO").value;  // Get the IMO from the input field
+            var imo = document.getElementById("vesselIMO").value;  // Get IMO number from input field
             if (imo) {
                 var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;  // Update the iframe URL with the entered IMO
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;  // Update iframe with the vessel's IMO
+            } else {
+                alert("Please enter a valid IMO number.");
             }
         }
     </script>
@@ -23,8 +31,9 @@
     <input type="text" id="vesselIMO" placeholder="Enter IMO number">
     <button onclick="loadMap()">Search</button>
 
-    <!-- Embed the VesselFinder map -->
-    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap" width="100%" height="600" style="border:none;"></iframe>
+    <br><br>
+    <!-- Initially load default map without any IMO -->
+    <iframe id="vesselMap" src="" width="100%" height="600" style="border:none;"></iframe>
 
 </body>
 </html>
