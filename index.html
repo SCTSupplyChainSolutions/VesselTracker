@@ -12,10 +12,10 @@
             height: 100%;
         }
 
-        /* Set the map container's width to 100% and height to full viewport height */
+        /* Map container should occupy 100% of the width and dynamic height */
         #map {
             width: 100%;
-            height: 100vh;  /* Use 100vh to set the height to 100% of the viewport */
+            height: 100%; /* Adjust dynamically with JavaScript */
         }
     </style>
 </head>
@@ -36,7 +36,7 @@
             // Initialize the map with the settings
             initMap();
         };
-        
+
         // Update the map height when the window is resized
         window.onresize = updateMapHeight;
 
@@ -51,12 +51,15 @@
 
         // Initialize the VesselFinder map
         function initMap() {
+            // Dynamically load the external map script
             var script = document.createElement("script");
             script.src = "https://www.vesselfinder.com/aismap.js"; // Load the map script
+            script.onload = function() {
+                // When the script loads, adjust the map's height if required
+                updateMapHeight();
+            };
             document.body.appendChild(script);
         }
     </script>
-
-    <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
 </body>
 </html>
