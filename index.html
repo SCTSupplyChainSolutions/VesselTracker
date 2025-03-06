@@ -8,10 +8,10 @@
         // Function to load the vessel map with the entered IMO number
         function searchVessel() {
             var imo = document.getElementById("vesselIMO").value;  // Get the IMO value from input
-            var iframe = document.getElementById("vesselMap");
             if (imo) {
-                // Set the iframe source to the VesselFinder URL with the entered IMO number
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  
+                // Set the iframe source to the VesselFinder URL with the entered IMO number and versioning query parameter
+                var iframe = document.getElementById("vesselMap");
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
             } else {
                 alert("Please enter a valid IMO number.");
             }
@@ -19,8 +19,10 @@
 
         // JavaScript to hide logo on scroll
         window.onscroll = function() { hideLogoOnScroll() };
+
+        var logo = document.getElementById("sctLogo");
+
         function hideLogoOnScroll() {
-            var logo = document.getElementById("sctLogo");
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
                 logo.style.display = "none";
             } else {
@@ -28,68 +30,87 @@
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> <!-- Link to Montserrat font -->
     <style>
+        /* General styling */
         body {
-            font-family: 'Montserrat', sans-serif;
-            color: #333;
-            padding: 20px;
+            font-family: 'Montserrat', sans-serif; /* Changed font family to Montserrat */
+            color: #333; /* Dark grey font color */
+            margin: 10;
+            padding: 20px; /* Added small padding around the body */
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
+
         p {
+            margin-top: 10px; /* Reduced top margin to reduce padding between text and top */
             text-align: left;
         }
+
         .search-bar-container {
             display: flex;
             align-items: center;
-            margin-top: 15px;
+            margin-top: 15px; /* Consistent gap from previous elements */
         }
+
         .search-bar-container input[type="text"] {
-            padding: 5px 10px;
+            padding: 5px 10px; /* Consistent padding for better visuals */
             width: 250px;
-            height: 30px;
-            margin-right: 10px;
+            font-size: 14px; /* Smaller font size */
+            height: 30px; /* Set height to 30px */
+            margin-right: 10px; /* Space between input and button */
         }
+
         .search-bar-container button {
             padding: 5px 10px;
-            height: 30px;
-            width: 80px;
+            font-size: 14px;
             cursor: pointer;
+            height: 30px; /* Set height to 30px, same as input */
+            width: 80px; /* Adjust button width */
         }
+
         iframe {
             width: 100%;
-            height: 400px;
             border: none;
-            margin-top: 20px;
-            display: block; /* Always show map */
+            margin-top: 20px; /* Consistent margin below the search box */
         }
+
+        /* Specific iframe settings */
+        #vesselMap {
+            height: 400px; /* Set height for VesselFinder iframe */
+            display: block; /* Always show the VesselFinder iframe */
+            src: "https://www.vesselfinder.com/aismap?v=1";
+        }
+
+        /* Logo styling */
         .logo {
-            position: fixed;
+            position: fixed;  /* Ensure the logo is fixed in the top-right corner */
             top: 20px;
             right: 20px;
-            width: 140px;
-            height: auto;
+            width: 140px;  /* Adjusted logo size */
+            height: 115;
             z-index: 9999;
         }
     </style>
 </head>
 <body>
+    <!-- SCT Logo in the top-right corner -->
     <img src="https://github.com/SCTSupplyChainSolutions/ShipTracker/blob/main/SCT%20Logo.jpg?raw=true" 
          alt="SCT Logo" 
-         class="logo" 
+         class="logo"
          id="sctLogo">
 
     <p>Please enter your order's IMO number to track vessel:</p>
 
+    <!-- Search input box for IMO and button -->
     <div class="search-bar-container">
         <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
         <button onclick="searchVessel()">Search</button>
     </div>
 
-    <!-- iframe displays map by default -->
+    <!-- iframe for the VesselFinder map (visible by default) -->
     <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1" frameborder="0"></iframe>
+
 </body>
 </html>
-
