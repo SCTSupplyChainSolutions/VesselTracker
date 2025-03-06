@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ship Tracker</title>
     <style>
-        /* Ensure the body and html fill the entire screen */
+        /* Ensure that the body and html take up the full screen */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
         }
 
-        /* Ensure the map container takes up 100% of the height */
+        /* Set the map container's width to 100% and height to full viewport height */
         #map {
             width: 100%;
-            height: 100vh; /* This ensures the map height is always 100% of the viewport height */
+            height: 100vh;  /* Use 100vh to set the height to 100% of the viewport */
         }
     </style>
 </head>
@@ -27,41 +27,32 @@
         // Function to update the height based on the window size
         function updateMapHeight() {
             var mapElement = document.getElementById('map');
-            mapElement.style.height = window.innerHeight + 'px'; // Set to the full height of the window
+            mapElement.style.height = window.innerHeight + 'px'; // Dynamically set the height
         }
 
         // Initial map height update
         window.onload = function() {
-            updateMapHeight(); // Update on initial load
-            // Initialize map with the settings
+            updateMapHeight(); // Set the height based on window size on page load
+            // Initialize the map with the settings
             initMap();
         };
         
-        // Update map height when the window is resized
+        // Update the map height when the window is resized
         window.onresize = updateMapHeight;
 
         // Map appearance settings
         var width = "100%";
         var height = "100%"; // Will be adjusted dynamically
-        var latitude = "0.00";
-        var longitude = "0.00";
-        var zoom = "3";
-        var names = false;
+        var names = true;
 
-        // Single ship tracking
-        var mmsi = "123456789";
-        var imo = "1234567";
-        var show_track = false;
+        // Single ship tracking settings
+        var imo = "9506291"; // IMO of the ship you want to track
+        var show_track = true; // Show the track line for the last 24 hours
 
-        // Fleet tracking
-        var fleet = "e48ab3d80a0e2a9bf28930f2dd08800c";
-        var fleet_name = "Carnival";
-        var fleet_timespan = "1440";
-
-        // Initialize map with VesselFinder script
+        // Initialize the VesselFinder map
         function initMap() {
             var script = document.createElement("script");
-            script.src = "https://www.vesselfinder.com/aismap.js";
+            script.src = "https://www.vesselfinder.com/aismap.js"; // Load the map script
             document.body.appendChild(script);
         }
     </script>
