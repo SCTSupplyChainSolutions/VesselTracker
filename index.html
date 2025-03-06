@@ -24,26 +24,28 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Align text to the left */
+            align-items: flex-start;
             padding: 20px;
         }
         h1, p {
-            margin: 10px 0; /* Adjust margins for consistent spacing */
-            text-align: left; /* Align text to the left */
+            margin: 10px 0;
+            text-align: left;
         }
+        /* Ensure the search input and button are next to each other and aligned properly */
         .search-bar-container {
             display: flex;
-            flex-direction: row; /* Horizontal layout */
-            align-items: center; /* Vertically align input and button */
+            align-items: center;  /* Center the button and input vertically */
             margin-top: 20px;
         }
         .search-bar-container input[type="text"] {
             padding: 10px;
-            width: 300px; /* Set a fixed width for the input */
+            width: 300px;
             margin-right: 10px; /* Space between the input and the button */
+            font-size: 16px;
         }
         .search-bar-container button {
             padding: 10px;
+            font-size: 16px;
             cursor: pointer;
         }
         iframe {
@@ -57,7 +59,7 @@
     <!-- SCT Logo in the top-right corner -->
     <img src="https://github.com/SCTSupplyChainSolutions/ShipTracker/blob/main/SCT%20Logo.jpg?raw=true" 
          alt="SCT Logo" 
-         class="logo">
+         class="logo" style="position: absolute; top: 20px; right: 20px; width: 150px; height: auto;">
 
     <h1>SCT Vessel Tracker</h1>
     <p>Please enter the IMO number of the vessel you wish to track:</p>
