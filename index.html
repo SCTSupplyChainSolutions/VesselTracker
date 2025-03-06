@@ -45,11 +45,6 @@
             padding: 20px;
         }
 
-        h1, p {
-            margin: 10px 0; /* Adjusted margin for better spacing */
-            text-align: left;
-        }
-
         .search-bar-container {
             display: flex;
             align-items: center;
@@ -93,7 +88,6 @@
             height: auto;
             z-index: 9999;
         }
-
     </style>
 </head>
 <body>
@@ -103,7 +97,6 @@
          class="logo"
          id="sctLogo">
 
-    <h1>SCT Vessel Tracker</h1>
     <p>Please enter the IMO number of the vessel you wish to track:</p>
 
     <!-- Search input box for IMO and button -->
@@ -111,9 +104,6 @@
         <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
         <button onclick="searchVessel()">Search</button>
     </div>
-
-    <!-- Message for user -->
-    <p>Once you enter the IMO number, the vessel's tracking map will appear:</p>
 
     <!-- iframe for the VesselFinder map (initially hidden) -->
     <iframe id="vesselMap" src="" frameborder="0"></iframe>
