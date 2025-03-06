@@ -39,12 +39,11 @@
     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
 
     <script type="text/javascript">
-        // Initialize the map and load it to the container
+        // Initialize the map when the page is loaded
         window.onload = function() {
-            // Call the vf_map function after the aismap.js script has fully loaded
+            // Make sure the map loads
             if (typeof vf_map !== 'undefined') {
                 vf_map();
-                console.log("Vessel Finder Map initialized.");
             }
         };
 
@@ -53,12 +52,18 @@
             var vesselInput = document.getElementById('vessel-input').value.trim();
             
             if (vesselInput) {
-                // Clear the map before tracking a new vessel
+                // Clear the map container before tracking a new vessel
                 document.getElementById('map').innerHTML = '';
 
-                // Initialize the map with the entered vessel info
+                // Initialize the map
+                if (typeof vf_map !== 'undefined') {
+                    vf_map();
+                    console.log("Vessel Finder Map initialized.");
+                }
+
+                // Track the vessel based on input (IMO or name)
                 if (typeof vf_track !== 'undefined') {
-                    vf_track(vesselInput, true, true);
+                    vf_track(vesselInput);
                     console.log("Tracking vessel:", vesselInput);
                 } else {
                     console.log("vf_track function not available.");
