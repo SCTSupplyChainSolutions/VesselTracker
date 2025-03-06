@@ -3,20 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vessel Finder</title>
+    <title>Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to load the default map when the page first loads
-        window.onload = function() {
-            var iframe = document.getElementById("vesselMap");
-            iframe.src = "https://www.vesselfinder.com/aismap";  // Load default map with no specific vessel
-        };
-
-        // Function to search for a vessel by IMO number
-        function loadMap() {
-            var imo = document.getElementById("vesselIMO").value;  // Get IMO number from input field
+        // Function to redirect to the VesselFinder page when an IMO is entered
+        function searchVessel() {
+            var imo = document.getElementById("vesselIMO").value;  // Get the IMO value from input
             if (imo) {
-                var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;  // Update iframe with the IMO number map
+                // Redirect to VesselFinder with the entered IMO number
+                window.location.href = "https://www.vesselfinder.com/aismap?imo=" + imo;
             } else {
                 alert("Please enter a valid IMO number.");
             }
@@ -24,17 +18,14 @@
     </script>
 </head>
 <body>
-    <h1>Vessel Finder</h1>
-    <p>Enter the IMO number of the vessel you want to track:</p>
+    <h1>Vessel Tracker</h1>
+    <p>Please enter the IMO number of the vessel you wish to track:</p>
 
-    <!-- Simple input form to enter IMO number -->
-    <input type="text" id="vesselIMO" placeholder="Enter IMO number">
-    <button onclick="loadMap()">Search</button>
+    <!-- Search input box for IMO -->
+    <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
+    <button onclick="searchVessel()">Search</button>
 
-    <br><br>
-
-    <!-- Initially load the default map (empty map or a general view) -->
-    <iframe id="vesselMap" src="" width="100%" height="600" style="border:none;"></iframe>
-
+    <!-- Message for user -->
+    <p>Once you enter the IMO number, you will be redirected to the vessel's tracking page.</p>
 </body>
 </html>
