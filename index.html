@@ -25,9 +25,9 @@
 
         function hideLogoOnScroll() {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                logo.style.display = "none";  // Hide logo on scroll
+                logo.style.display = "none";
             } else {
-                logo.style.display = "block";  // Show logo when scrolling back to top
+                logo.style.display = "block";
             }
         }
     </script>
@@ -92,7 +92,6 @@
             width: 200px;  /* Adjusted logo size */
             height: auto;
             z-index: 9999;
-            transition: display 0.3s ease;  /* Smooth transition when hiding */
         }
 
     </style>
