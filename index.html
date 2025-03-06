@@ -21,8 +21,9 @@
         /* Ensure the logo stays in the top-right corner */
         body {
             position: relative; /* Allow absolute positioning within body */
-            padding-top: 60px;  /* Add some space at the top to avoid overlap */
             font-family: Arial, sans-serif;  /* Optional: for better text font */
+            margin: 0;
+            padding: 0;
         }
         .logo {
             position: absolute;
@@ -42,7 +43,18 @@
         .input-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: flex-start;  /* Align to the left */
+            margin-top: 20px;  /* Add some space between text and input box */
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px; /* Space between input box and button */
+            width: 300px; /* Adjust the width of the input box */
+        }
+        button {
+            padding: 10px;
+            width: 300px;  /* Make the button the same width as the input box */
+            cursor: pointer;
         }
         iframe {
             width: 100%;
