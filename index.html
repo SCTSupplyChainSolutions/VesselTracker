@@ -35,23 +35,10 @@
     <!-- Map container -->
     <div id="map"></div>
 
+    <!-- Map Script -->
+    <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+
     <script type="text/javascript">
-        // Function to load the VesselFinder map script dynamically
-        function loadScript(src, callback) {
-            var script = document.createElement("script");
-            script.src = src;
-            script.onload = callback;
-            document.head.appendChild(script);
-        }
-
-        // Function to initialize the VesselFinder map
-        function initializeMap() {
-            // Initialize the map with default settings
-            window.vf_track = function () { 
-                console.log("Initializing vessel map..."); 
-            };
-        }
-
         // Function to track the vessel by name or IMO
         function trackVessel() {
             var vesselInput = document.getElementById('vessel-input').value.trim();
@@ -60,21 +47,20 @@
                 // Clear the map before tracking a new vessel
                 document.getElementById('map').innerHTML = '';
 
-                // Load the VesselFinder map script and track the vessel
-                loadScript("https://www.vesselfinder.com/aismap.js", function () {
-                    window.vf_track(vesselInput, true, true);
-                    console.log("Tracking vessel:", vesselInput);
-                });
+                // Initialize the map with the entered vessel info
+                window.vf_track(vesselInput, true, true);
+                console.log("Tracking vessel:", vesselInput);
             } else {
                 alert("Please enter a vessel name or IMO.");
             }
         }
 
         // Initialize the map when the page loads
-        window.onload = initializeMap;
-
+        window.onload = function() {
+            // Default behavior or additional setup if needed
+            console.log("Vessel Finder Map is ready.");
+        };
     </script>
 
 </body>
 </html>
-
