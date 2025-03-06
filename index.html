@@ -3,76 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vessel Finder Map</title>
+    <title>Vessel Finder</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
         #map {
             width: 100%;
-            height: 80vh; /* Full-screen map height */
+            height: 80vh; /* Full-screen height */
             border: 1px solid #ddd;
-        }
-        input, button {
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        button {
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <h1>Track a Vessel</h1>
-    
+    <h1>Vessel Finder</h1>
+
     <!-- Input for Vessel Name or IMO -->
     <input type="text" id="vessel-input" placeholder="Enter Vessel Name or IMO" />
     <button onclick="trackVessel()">Track Vessel</button>
-    
+
     <!-- Map container -->
     <div id="map"></div>
 
-    <!-- Map Script -->
+    <!-- Embed the VesselFinder script -->
     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
-
     <script type="text/javascript">
-        // Initialize the map when the page is loaded
+        // Ensure that the map is initialized when the page loads
         window.onload = function() {
-            // Make sure the map loads
             if (typeof vf_map !== 'undefined') {
-                vf_map();
+                vf_map();  // Initialize the map
             }
         };
 
         // Function to track the vessel by name or IMO
         function trackVessel() {
             var vesselInput = document.getElementById('vessel-input').value.trim();
-            
+
             if (vesselInput) {
                 // Clear the map container before tracking a new vessel
                 document.getElementById('map').innerHTML = '';
 
-                // Initialize the map
+                // Initialize the map again after clearing the container
                 if (typeof vf_map !== 'undefined') {
-                    vf_map();
-                    console.log("Vessel Finder Map initialized.");
+                    vf_map();  // Reinitialize the map
                 }
 
-                // Track the vessel based on input (IMO or name)
+                // Track the vessel by IMO or Name
                 if (typeof vf_track !== 'undefined') {
-                    vf_track(vesselInput);
-                    console.log("Tracking vessel:", vesselInput);
+                    vf_track(vesselInput);  // Track the entered vessel
                 } else {
-                    console.log("vf_track function not available.");
+                    alert("Tracking function not available.");
                 }
             } else {
                 alert("Please enter a vessel name or IMO.");
             }
         }
     </script>
-
 </body>
 </html>
