@@ -30,8 +30,13 @@
 
                 // After the script loads, initialize the vessel tracker with the dynamic IMO
                 script.onload = function() {
-                    // Ensure the map is correctly initialized with the dynamic IMO
-                    vf_track(imo, true, true);  // Track the vessel with the dynamic IMO value
+                    // Check if the 'vf_track' function is available
+                    if (typeof window.vf_track === "function") {
+                        // Initialize the tracker with the IMO
+                        window.vf_track(imo, true, true);  // Track the vessel with the dynamic IMO value
+                    } else {
+                        console.error("vf_track function not available.");
+                    }
                 };
             } else {
                 alert("IMO parameter is missing from the URL.");
