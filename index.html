@@ -28,25 +28,27 @@
             padding: 20px;
         }
         h1, p {
-            margin: 10px 0;
+            margin: 5px 0; /* Reduced margin between the header and text */
             text-align: left;
         }
         /* Ensure the search input and button are next to each other and aligned properly */
         .search-bar-container {
             display: flex;
-            align-items: center;  /* Center the button and input vertically */
-            margin-top: 20px;
+            align-items: center;
+            margin-top: 10px; /* Reduced space between text and search box */
         }
         .search-bar-container input[type="text"] {
-            padding: 10px;
-            width: 300px;
+            padding: 5px 10px; /* Reduced padding to make it thinner */
+            width: 250px; /* Adjusted width of the input box */
             margin-right: 10px; /* Space between the input and the button */
-            font-size: 16px;
+            font-size: 14px; /* Reduced font size */
+            height: 35px; /* Reduced height of the input box */
         }
         .search-bar-container button {
-            padding: 10px;
-            font-size: 16px;
+            padding: 5px 10px; /* Reduced padding for the button */
+            font-size: 14px; /* Reduced font size */
             cursor: pointer;
+            height: 35px; /* Ensured the button has the same height as the input box */
         }
         iframe {
             width: 100%;
