@@ -12,6 +12,8 @@
                 // Set the iframe source to the VesselFinder URL with the entered IMO number
                 var iframe = document.getElementById("vesselMap");
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo;
+                iframe.style.display = "block";  // Make the VesselFinder iframe visible
+                document.getElementById("githubIframe").style.display = "none";  // Hide GitHub iframe
             } else {
                 alert("Please enter a valid IMO number.");
             }
@@ -60,9 +62,19 @@
 
         iframe {
             width: 100%;
-            height: 300px;
             border: none;
             margin-top: 20px; /* Consistent margin below the search box */
+        }
+
+        /* Specific iframe settings */
+        #vesselMap {
+            height: 300px; /* Set height for VesselFinder iframe */
+            display: none; /* Initially hide the VesselFinder iframe */
+        }
+
+        #githubIframe {
+            height: 300px; /* Height for GitHub Pages iframe */
+            display: block; /* Initially show GitHub iframe */
         }
 
         /* Logo styling */
@@ -74,7 +86,6 @@
             height: auto;
             z-index: 9999;
         }
-
     </style>
 </head>
 <body>
@@ -95,10 +106,11 @@
     <!-- Message for user -->
     <p>Once you enter the IMO number, the vessel's tracking map will appear:</p>
 
-    <!-- iframe for the map (initially empty) -->
+    <!-- iframe for the VesselFinder map (initially hidden) -->
     <iframe id="vesselMap" src="" frameborder="0"></iframe>
 
-    <!-- Adding the correct iframe link for GitHub Pages -->
-    <iframe src="https://sctsupplychainsolutions.github.io/ShipTracker/" width="100%" height="600px" frameborder="0"></iframe>
+    <!-- iframe for GitHub Pages (initially visible) -->
+    <iframe id="githubIframe" src="https://sctsupplychainsolutions.github.io/ShipTracker/" width="100%" frameborder="0"></iframe>
 </body>
 </html>
+
