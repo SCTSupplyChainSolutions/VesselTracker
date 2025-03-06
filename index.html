@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to redirect to the VesselFinder page when a vessel name is entered
+        // Function to load the map with the vessel name
         function searchVessel() {
             var vesselName = document.getElementById("vesselName").value;  // Get the vessel name value from input
             if (vesselName) {
-                // Redirect to VesselFinder with the entered vessel name (tracking the vessel)
-                window.location.href = "https://www.vesselfinder.com/vessels?name=" + vesselName;
+                // Create a dynamic URL based on the entered vessel name
+                var url = "https://www.vesselfinder.com/vessels?name=" + vesselName;
+                
+                // Set the iframe source to the dynamic URL to load the map
+                document.getElementById("vesselMap").src = url;
             } else {
                 alert("Please enter a valid vessel name.");
             }
@@ -26,6 +29,9 @@
     <button onclick="searchVessel()">Search</button>
 
     <!-- Message for user -->
-    <p>Once you enter the vessel name, you will be redirected to the vessel's tracking page.</p>
+    <p>Once you enter the vessel name, you will be redirected to the vessel's tracking map.</p>
+
+    <!-- iframe for the map (initially empty) -->
+    <iframe id="vesselMap" style="width: 100%; height: 600px; border: none;" src="" frameborder="0"></iframe>
 </body>
 </html>
