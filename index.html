@@ -5,28 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to redirect to the VesselFinder page when a vessel name is entered
-        function searchVessel() {
-            var vesselName = document.getElementById("vesselName").value;  // Get the vessel name value from input
+        // Default map appearance
+        var width="100%";         // width in pixels or percentage
+        var height="300";         // height in pixels
+        var latitude="36.00";     // center latitude (decimal degrees)
+        var longitude="-5.40";    // center longitude (decimal degrees)
+        var zoom="8";             // initial zoom (between 3 and 18)
+
+        // Function to load the vessel by name on the map after searching
+        function loadVessel() {
+            var vesselName = document.getElementById("vesselName").value;  // Get the vessel name from the input field
             if (vesselName) {
-                // Redirect to VesselFinder with the entered vessel name
+                // Change the map settings and the URL to track the vessel
                 window.location.href = "https://www.vesselfinder.com/vessels?name=" + vesselName;
             } else {
-                alert("Please enter a valid vessel name.");
+                alert("Please enter a vessel name to search.");
             }
         }
     </script>
 </head>
 <body>
+
     <h1>Vessel Tracker</h1>
     <p>Please enter the name of the vessel you wish to track:</p>
 
-    <!-- Search input box for Vessel Name -->
+    <!-- Search input box for vessel name -->
     <input type="text" id="vesselName" placeholder="Enter Vessel Name" />
-    <button onclick="searchVessel()">Search</button>
+    <button onclick="loadVessel()">Search</button>
 
-    <!-- Message for user -->
-    <p>Once you enter the vessel name, you will be redirected to the vessel's tracking page.</p>
+    <script type="text/javascript">
+        // Default map appearance settings (for the initial map display)
+        var width="100%";         
+        var height="500";         
+        var latitude="36.00";     
+        var longitude="-5.40";    
+        var zoom="8";             
+
+        // Map initialization script for VesselFinder's embedded map
+        window.onload = function() {
+            var script = document.createElement('script');
+            script.src = 'https://www.vesselfinder.com/aismap.js';
+            document.body.appendChild(script);
+        };
+    </script>
+
 </body>
 </html>
 
