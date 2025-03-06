@@ -53,13 +53,22 @@
             height: 600px;
             border: none;
         }
+        /* Logo styling */
+        .logo {
+            position: fixed;  /* Ensure the logo is fixed in the top-right corner */
+            top: 20px;
+            right: 20px;
+            width: 100px;  /* Adjusted size */
+            height: auto;
+            z-index: 9999;
+        }
     </style>
 </head>
 <body>
     <!-- SCT Logo in the top-right corner -->
     <img src="https://github.com/SCTSupplyChainSolutions/ShipTracker/blob/main/SCT%20Logo.jpg?raw=true" 
          alt="SCT Logo" 
-         class="logo" style="position: absolute; top: 20px; right: 20px; width: 150px; height: auto;">
+         class="logo">
 
     <h1>SCT Vessel Tracker</h1>
     <p>Please enter the IMO number of the vessel you wish to track:</p>
