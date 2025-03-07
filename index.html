@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCT Vessel Tracker</title>
     <script type="text/javascript">
+        // Function to load the vessel map with the entered IMO number or URL parameter
+        function searchVessel() {
+            var imoNumber = document.getElementById("vesselIMO").value;  // Get IMO from input field
+            if (imoNumber) {
+                // Set the iframe source to the VesselFinder URL with the entered IMO number and versioning query parameter
+                var iframe = document.getElementById("vesselMap");
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imoNumber + "&v=1";  // Added "?v=1" for versioning
+            } else {
+                alert("Please enter a valid IMO number.");
+            }
+        }
+
         // JavaScript to hide logo on scroll
         window.onscroll = function () { hideLogoOnScroll() };
 
@@ -29,17 +41,17 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            padding-top: 180px; /* Increased padding to move the map further down */
         }
 
         iframe {
             width: 100%;
             border: none;
+            margin-top: 20px;
         }
 
         /* Specific iframe settings */
         #vesselMap {
-            height: 500px; /* Changed the iframe height to 500px */
+            height: 500px;  /* Updated iframe height */
             display: block;
         }
 
@@ -52,6 +64,29 @@
             height: 115px;
             z-index: 9999;
         }
+
+        /* Search bar container */
+        .search-bar-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;  /* Adjusted space below logo */
+        }
+
+        .search-bar-container input[type="text"] {
+            padding: 5px 10px;
+            width: 250px;
+            font-size: 14px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .search-bar-container button {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            height: 30px;
+            width: 80px;
+        }
     </style>
 </head>
 <body>
@@ -61,8 +96,11 @@
          class="logo"
          id="sctLogo">
 
-    <!-- iframe for the VesselFinder map (visible by default) -->
-    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" frameborder="0"></iframe>
-</body>
-</html>
+    <!-- Search input box for IMO and button -->
+    <div class="search-bar-container">
+        <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
+        <button onclick="searchVessel()">Search</button>
+    </div>
+
+    <!-- iframe for the VesselFinder ma
 
