@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCT Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to get IMO number from URL parameters and redirect the iframe
         window.onload = function () {
             const urlParams = new URLSearchParams(window.location.search);
             const imo = urlParams.get('imo');
+            var iframe = document.getElementById("vesselMap");
+
             if (imo) {
-                // Redirect the iframe to the VesselFinder map with the entered IMO number
-                var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
+                // Redirect to the VesselFinder map with the entered IMO number
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
             } else {
-                // Default map if no IMO parameter is provided
-                var iframe = document.getElementById("vesselMap");
+                // Load default map if no IMO is provided in the URL
                 iframe.src = "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375";
             }
         };
@@ -36,7 +35,7 @@
         iframe {
             width: 100%;
             border: none;
-            margin-top:120px;
+            margin-top: 20px;
         }
 
         /* Specific iframe settings */
@@ -64,6 +63,8 @@
          id="sctLogo">
 
     <!-- iframe for the VesselFinder map -->
-    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" frameborder="0"></iframe>
+    <iframe id="vesselMap" 
+            src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" 
+            frameborder="0"></iframe>
 </body>
 </html>
