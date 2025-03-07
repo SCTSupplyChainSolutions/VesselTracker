@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCT Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to load the vessel map with the entered IMO number
-        function searchVessel() {
-            var imo = document.getElementById("vesselIMO").value;  // Get the IMO value from input
-            if (imo) {
+        // Function to load the vessel map with the entered IMO number or URL parameter
+        function searchVessel(imo) {
+            var imoNumber = imo || document.getElementById("vesselIMO").value;  // Use IMO from URL parameter or input
+            if (imoNumber) {
                 // Set the iframe source to the VesselFinder URL with the entered IMO number and versioning query parameter
                 var iframe = document.getElementById("vesselMap");
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
-            } else {
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imoNumber + "&v=1";  // Added "?v=1" for versioning
+            } else if (!imo) {
                 alert("Please enter a valid IMO number.");
             }
         }
 
+        // Function to get IMO number from URL parameters and search automatically
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imo = urlParams.get('imo');
+            if (imo) {
+                searchVessel(imo);
+                document.getElementById("vesselIMO").value = imo; // Optional: Pre-fill the input field
+            }
+        };
+
         // JavaScript to hide logo on scroll
-        window.onscroll = function() { hideLogoOnScroll() };
+        window.onscroll = function () { hideLogoOnScroll() };
 
         var logo = document.getElementById("sctLogo");
 
@@ -80,7 +90,6 @@
         #vesselMap {
             height: 425px;
             display: block;
-            src: "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-30.6&lon=22.9375"; /* Centered over South Africa */
         }
 
         /* Logo styling */
@@ -89,7 +98,7 @@
             top: 20px;
             right: 20px;
             width: 140px;
-            height: 115;
+            height: 115px;
             z-index: 9999;
         }
     </style>
@@ -111,7 +120,5 @@
 
     <!-- iframe for the VesselFinder map (visible by default) -->
     <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" frameborder="0"></iframe>
-
 </body>
 </html>
-
