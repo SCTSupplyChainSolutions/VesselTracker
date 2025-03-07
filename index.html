@@ -53,33 +53,6 @@
             align-items: flex-start;
         }
 
-        p {
-            margin-top: 10px;
-            text-align: left;
-        }
-
-        .search-bar-container {
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .search-bar-container input[type="text"] {
-            padding: 5px 10px;
-            width: 250px;
-            font-size: 14px;
-            height: 30px;
-            margin-right: 10px;
-        }
-
-        .search-bar-container button {
-            padding: 5px 10px;
-            font-size: 14px;
-            cursor: pointer;
-            height: 30px;
-            width: 80px;
-        }
-
         iframe {
             width: 100%;
             border: none;
@@ -109,14 +82,6 @@
          alt="SCT Logo" 
          class="logo"
          id="sctLogo">
-
-    <p>Please enter your order's IMO number to track vessel:</p>
-
-    <!-- Search input box for IMO and button -->
-    <div class="search-bar-container">
-        <input type="text" id="vesselIMO" placeholder="Enter IMO number" />
-        <button onclick="searchVessel()">Search</button>
-    </div>
 
     <!-- iframe for the VesselFinder map (visible by default) -->
     <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" frameborder="0"></iframe>
