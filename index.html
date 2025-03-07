@@ -34,6 +34,17 @@
             position: relative; /* To control logo positioning */
         }
 
+        /* Add styling for the text in the top-left */
+        .instructions {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            z-index: 10;
+        }
+
         /* Ensure the logo stays fixed on the top-right corner */
         .logo {
             position: fixed;
@@ -58,6 +69,11 @@
     </style>
 </head>
 <body>
+    <!-- Instructions text in the top-left corner -->
+    <div class="instructions">
+        Please select order number and IMO to track vessel
+    </div>
+
     <!-- SCT Logo in the top-right corner -->
     <img src="https://github.com/SCTSupplyChainSolutions/ShipTracker/blob/main/SCT%20Logo.jpg?raw=true" 
          alt="SCT Logo" 
