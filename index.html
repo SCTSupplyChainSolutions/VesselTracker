@@ -9,13 +9,13 @@
         window.onload = function () {
             const urlParams = new URLSearchParams(window.location.search);
             const imo = urlParams.get('imo');
+            var iframe = document.getElementById("vesselMap");
+
             if (imo) {
                 // Redirect the iframe to the VesselFinder map with the entered IMO number
-                var iframe = document.getElementById("vesselMap");
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
             } else {
                 // Default map if no IMO parameter is provided
-                var iframe = document.getElementById("vesselMap");
                 iframe.src = "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375";
             }
         };
@@ -26,26 +26,15 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: #333;
-            margin: 10;
+            margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            position: relative; /* To control logo positioning */
         }
 
-        iframe {
-            width: 100%;
-            border: none;
-            margin-top:120px;
-        }
-
-        /* Specific iframe settings */
-        #vesselMap {
-            height: 400px;
-            display: block;
-        }
-
-        /* Logo styling */
+        /* Ensure the logo stays fixed on the top-right corner */
         .logo {
             position: fixed;
             top: 20px;
@@ -53,6 +42,18 @@
             width: 140px;
             height: 115px;
             z-index: 9999;
+        }
+
+        iframe {
+            width: 100%;
+            border: none;
+            margin-top: 140px; /* Increased margin to ensure the logo does not overlap the iframe */
+        }
+
+        /* Specific iframe settings */
+        #vesselMap {
+            height: 400px;
+            display: block;
         }
     </style>
 </head>
