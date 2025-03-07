@@ -1,21 +1,4 @@
-<script type="text/javascript">
-    // Function to get IMO number from URL parameters and redirect the iframe
-    window.onload = function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const imo = urlParams.get('imo');
-        if (imo) {
-            // Redirect the iframe to the VesselFinder map with the entered IMO number
-            var iframe = document.getElementById("vesselMap");
-            iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
-        } else {
-            // Default map if no IMO parameter is provided
-            var iframe = document.getElementById("vesselMap");
-            iframe.src = "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375";
-        }
-    };
-</script>
-
-is this different to <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
