@@ -10,13 +10,17 @@
             const urlParams = new URLSearchParams(window.location.search);
             const imo = urlParams.get('imo');
             var iframe = document.getElementById("vesselMap");
+            var instructions = document.getElementById("instructions");
 
             if (imo) {
                 // Redirect the iframe to the VesselFinder map with the entered IMO number
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
+                iframe.style.display = "block"; // Show the iframe once IMO is found
+                instructions.style.display = "none"; // Hide instructions once IMO is entered
             } else {
-                // Default map if no IMO parameter is provided
-                iframe.src = "https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375";
+                // Show instructions if no IMO parameter is provided
+                instructions.innerHTML = "Please provide an IMO number in the URL to track the vessel.";
+                iframe.style.display = "none"; // Hide iframe initially
             }
         };
     </script>
@@ -59,6 +63,7 @@
             width: 100%;
             border: none;
             margin-top: 140px; /* Increased margin to ensure the logo does not overlap the iframe */
+            display: none; /* Initially hide the iframe */
         }
 
         /* Specific iframe settings */
@@ -70,8 +75,8 @@
 </head>
 <body>
     <!-- Instructions text in the top-left corner -->
-    <div class="instructions">
-        Please select order number and IMO to track vessel
+    <div class="instructions" id="instructions">
+        Please enter an IMO number in the URL to track vessel.
     </div>
 
     <!-- SCT Logo in the top-right corner -->
@@ -81,7 +86,7 @@
          id="sctLogo">
 
     <!-- iframe for the VesselFinder map -->
-    <iframe id="vesselMap" src="https://www.vesselfinder.com/aismap?v=1&zoom=5&lat=-29.5595&lon=22.9375" frameborder="0"></iframe>
+    <iframe id="vesselMap" frameborder="0"></iframe>
 </body>
 </html>
 
