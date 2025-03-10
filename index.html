@@ -16,7 +16,9 @@
                 // Redirect the iframe to the VesselFinder map with the entered IMO number
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
                 iframe.style.display = "block"; // Show the iframe once IMO is found
-                logo.style.display = "none"; // Hide the logo once IMO is found
+                if (logo) {
+                    logo.style.display = "none"; // Hide the logo once IMO is found
+                }
             } else {
                 iframe.style.display = "none"; // Hide iframe if no IMO parameter is provided
             }
