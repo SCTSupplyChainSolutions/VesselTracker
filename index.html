@@ -10,17 +10,13 @@
             const urlParams = new URLSearchParams(window.location.search);
             const imo = urlParams.get('imo');
             var iframe = document.getElementById("vesselMap");
-            var instructions = document.getElementById("instructions");
 
             if (imo) {
                 // Redirect the iframe to the VesselFinder map with the entered IMO number
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
                 iframe.style.display = "block"; // Show the iframe once IMO is found
-                instructions.style.display = "none"; // Hide instructions once IMO is entered
             } else {
-                // Show instructions if no IMO parameter is provided
-                instructions.innerHTML = "Please select the order number and corresponding IMO to track vessel";
-                iframe.style.display = "none"; // Hide iframe initially
+                iframe.style.display = "none"; // Hide iframe if no IMO parameter is provided
             }
         };
     </script>
@@ -74,9 +70,9 @@
     </style>
 </head>
 <body>
-    <!-- Instructions text in the top-left corner -->
+    <!-- Instructions text in the top-left corner (always present) -->
     <div class="instructions" id="instructions">
-        Please enter an IMO number in the URL to track vessel.
+        Please select the order number and corresponding IMO to track vessel.
     </div>
 
     <!-- SCT Logo in the top-right corner -->
@@ -89,4 +85,3 @@
     <iframe id="vesselMap" frameborder="0"></iframe>
 </body>
 </html>
-
