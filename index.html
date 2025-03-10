@@ -49,13 +49,15 @@
         .logoBox {
             position: fixed;
             top: 20px;
-            right: 20px;
+            right: 0;
             background-color: white;
             padding: 10px;
-            z-index: 999;  /* Set lower z-index for the container */
+            z-index: 999;  /* Ensure it's above other content */
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             display: block;
-            margin-right: 60px; /* Extend the box 60px to the left of the logo */
+            width: calc(100% - 20px); /* Extend the container to the right edge of the iframe */
+            margin-right: 0px; /* No extra space on the right */
+            padding-left: 20px; /* Increased left padding */
         }
 
         /* Logo style */
