@@ -45,6 +45,16 @@
             z-index: 10;
         }
 
+        /* New styling for the additional information text */
+        .additionalInfo {
+            position: absolute;
+            top: 75px; /* Position it just below the instructions */
+            left: 20px;
+            font-size: 14px; /* Smaller font size */
+            color: #666; /* Slightly lighter color */
+            font-weight: 400;
+        }
+
         /* Container for the logo with a white background (changed from fixed to absolute for scrolling) */
         .logoBox {
             position: absolute; /* Changed to absolute to scroll with the page */
@@ -83,7 +93,12 @@
 <body>
     <!-- Instructions text in the top-left corner (always present) -->
     <div class="instructions" id="instructions">
-        Please select your Client Ref and corresponding IMO to track vessel                 *only for Arriving Vessel (Imports) and Departing Vessel (Exports)
+        Please select your Client Ref and corresponding IMO to track vessel 
+    </div>
+
+    <!-- Additional information text below the instructions -->
+    <div class="additionalInfo">
+        * only tracks Arriving Vessel (Imports) or Departing Vessel (Exports)
     </div>
 
     <!-- SCT Logo in a white box in the top-right corner -->
