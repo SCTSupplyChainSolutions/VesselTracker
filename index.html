@@ -13,8 +13,8 @@
             if (imo) {
                 iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
             } else {
-                // Adjusted view to fully encapsulate South Africa
-                iframe.src = "https://www.vesselfinder.com/aismap?lat=-28&lon=25&zoom=4.6&v=1";
+                // Pan slightly north & east, keep zoom level same
+                iframe.src = "https://www.vesselfinder.com/aismap?lat=-27.5&lon=24&zoom=5&v=1";
             }
 
             iframe.style.display = "block";
