@@ -13,11 +13,13 @@
 
             if (imo) {
                 // Redirect the iframe to the VesselFinder map with the entered IMO number
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";  // Added "?v=1" for versioning
-                iframe.style.display = "block"; // Show the iframe once IMO is found
+                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
             } else {
-                iframe.style.display = "none"; // Hide iframe if no IMO parameter is provided
+                // Center the map on South Africa if no IMO is provided
+                iframe.src = "https://www.vesselfinder.com/aismap?lat=-30.5595&lon=22.9375&zoom=5&v=1";
             }
+
+            iframe.style.display = "block"; // Always show the iframe
         };
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> <!-- Link to Montserrat font -->
@@ -34,30 +36,30 @@
             position: relative; 
         }
 
-        /* Add styling for the text in the top-left */
+        /* Instructions text styling */
         .instructions {
             position: absolute;
             top: 35px; 
             left: 20px;
-            font-size: 18px; /* Larger font size */
-            font-weight: 400; /* Less bold */
+            font-size: 18px;
+            font-weight: 400;
             color: #333;
             z-index: 10;
         }
 
-        /* New styling for the additional information text */
+        /* Additional info text */
         .additionalInfo {
             position: absolute;
-            top: 68px; /* Position it just below the instructions */
+            top: 68px;
             left: 20px;
-            font-size: 14px; /* Smaller font size */
-            color: #666; /* Slightly lighter color */
+            font-size: 14px;
+            color: #666;
             font-weight: 400;
         }
 
-        /* Container for the logo with a white background (changed from fixed to absolute for scrolling) */
+        /* Logo container styling */
         .logoBox {
-            position: absolute; /* Changed to absolute to scroll with the page */
+            position: absolute;
             top: 10px;
             right: 0px;  
             background-color: white;
@@ -70,38 +72,36 @@
             height: 100px;  
         }
 
-        /* Logo style */
+        /* Logo image */
         .logo {
             width: 125px;
             height: 100px;
         }
 
+        /* iframe settings */
         iframe {
             width: 100%;
             border: none;
-            margin-top: 70px; /* Increased margin to ensure the logo does not overlap the iframe */
-            display: none; /* Initially hide the iframe */
+            margin-top: 70px;
         }
 
-        /* Specific iframe settings */
         #vesselMap {
             height: 400px;
-            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Instructions text in the top-left corner (always present) -->
+    <!-- Instructions -->
     <div class="instructions" id="instructions">
         Please select your Client Ref and corresponding IMO to track vessel 
     </div>
 
-    <!-- Additional information text below the instructions -->
+    <!-- Additional info -->
     <div class="additionalInfo">
         * only tracks Arriving Vessel (Imports) or Departing Vessel (Exports)
     </div>
 
-    <!-- SCT Logo in a white box in the top-right corner -->
+    <!-- Logo -->
     <div class="logoBox" id="logoBox">
         <img src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true" 
              alt="SCT Logo" 
@@ -109,7 +109,7 @@
              id="sctLogo">
     </div>
 
-    <!-- iframe for the VesselFinder map -->
+    <!-- VesselFinder Map iframe -->
     <iframe id="vesselMap" frameborder="0"></iframe>
 </body>
 </html>
