@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SCT Vessel Tracker</title>
     <script type="text/javascript">
-        // Function to get IMO number from URL parameters and redirect the iframe
         window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const imo = urlParams.get('imo');
-            var iframe = document.getElementById("vesselMap");
+            setTimeout(function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                const imo = urlParams.get('imo');
+                var iframe = document.getElementById("vesselMap");
 
-            if (imo && imo.trim() !== "") {
-                // Redirect the iframe to the VesselFinder map with the entered IMO number
-                iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
-            } else {
-                // Center the map on South Africa if no valid IMO is provided
-                iframe.src = "https://www.vesselfinder.com/aismap?lat=-29&lon=22.9375&zoom=5&v=1";
-            }
+                if (imo && imo.trim() !== "") {
+                    iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
+                } else {
+                    iframe.src = "https://www.vesselfinder.com/aismap?lat=-29&lon=22.9375&zoom=5&v=1";
+                }
 
-            iframe.style.display = "block"; // Always show the iframe
+                iframe.style.display = "block";
+            }, 100); // Delay to allow Metabase iframe param to resolve
         };
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+        rel="stylesheet"
+    />
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -34,7 +36,6 @@
             align-items: flex-start;
             position: relative;
         }
-
         .instructions {
             position: absolute;
             top: 35px;
@@ -44,7 +45,6 @@
             color: #333;
             z-index: 10;
         }
-
         .additionalInfo {
             position: absolute;
             top: 68px;
@@ -53,7 +53,6 @@
             color: #666;
             font-weight: 400;
         }
-
         .logoBox {
             position: absolute;
             top: 10px;
@@ -67,18 +66,15 @@
             width: 270px;
             height: 100px;
         }
-
         .logo {
             width: 125px;
             height: 100px;
         }
-
         iframe {
             width: 100%;
             border: none;
             margin-top: 70px;
         }
-
         #vesselMap {
             height: 400px;
         }
@@ -86,16 +82,16 @@
 </head>
 <body>
     <div class="instructions" id="instructions">
-        Please select your Client Ref and corresponding IMO to track vessel 
+        Please select your Client Ref and corresponding IMO to track vessel
     </div>
-
     <div class="logoBox" id="logoBox">
-        <img src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true" 
-             alt="SCT Logo" 
-             class="logo"
-             id="sctLogo">
+        <img
+            src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true"
+            alt="SCT Logo"
+            class="logo"
+            id="sctLogo"
+        />
     </div>
-
     <iframe id="vesselMap" frameborder="0"></iframe>
 </body>
 </html>
