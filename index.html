@@ -6,7 +6,9 @@
   <title>SCT Vessel Tracker</title>
   <script type="text/javascript">
     function isValidIMO(imo) {
-      return typeof imo === "string" && imo.trim().length > 0;
+      if (typeof imo !== "string") return false;
+      const trimmed = imo.trim().toLowerCase();
+      return trimmed !== "" && trimmed !== "null" && trimmed !== "undefined";
     }
 
     window.onload = function () {
