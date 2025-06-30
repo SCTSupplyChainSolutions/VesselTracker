@@ -12,27 +12,21 @@
     }
 
     window.onload = function () {
-      setTimeout(function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const imo = urlParams.get("imo");
-        var iframe = document.getElementById("vesselMap");
+      const urlParams = new URLSearchParams(window.location.search);
+      const imo = urlParams.get("imo");
+      var iframe = document.getElementById("vesselMap");
 
-        if (isValidIMO(imo)) {
-          iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
-        } else {
-          // Center over South Africa as fallback
-          iframe.src =
-            "https://www.vesselfinder.com/aismap?lat=-29&lon=22.9375&zoom=5&v=1";
-        }
+      if (isValidIMO(imo)) {
+        iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
+      } else {
+        // Center over South Africa as fallback
+        iframe.src = "https://www.vesselfinder.com/aismap?lat=-29&lon=22.9375&zoom=5&v=1";
+      }
 
-        iframe.style.display = "block";
-      }, 100);
+      iframe.style.display = "block";
     };
   </script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: "Montserrat", sans-serif;
