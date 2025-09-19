@@ -14,7 +14,7 @@
     window.onload = function () {
       const urlParams = new URLSearchParams(window.location.search);
       const imo = urlParams.get("imo");
-      var iframe = document.getElementById("vesselMap");
+      const iframe = document.getElementById("vesselMap");
 
       if (isValidIMO(imo)) {
         iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
@@ -37,7 +37,10 @@
       flex-direction: column;
       align-items: flex-start;
       position: relative;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
+
     .instructions {
       position: absolute;
       top: 35px;
@@ -47,6 +50,7 @@
       color: #333;
       z-index: 10;
     }
+
     .additionalInfo {
       position: absolute;
       top: 60px;
@@ -55,6 +59,7 @@
       color: #666;
       font-weight: 400;
     }
+
     .logoBox {
       position: absolute;
       top: 10px;
@@ -68,17 +73,46 @@
       width: 270px;
       height: 100px;
     }
+
     .logo {
       width: 125px;
       height: 100px;
     }
-    iframe {
+
+    /* Responsive iframe container */
+    .iframe-container {
+      position: relative;
       width: 100%;
-      border: none;
-      margin-top: 70px;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      margin-top: 70px; /* Space for instructions/logo */
     }
+
     #vesselMap {
-      height: 400px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .instructions {
+        font-size: 14px;
+        top: 30px;
+      }
+      .additionalInfo {
+        font-size: 12px;
+        top: 55px;
+      }
+      .logoBox {
+        width: 200px;
+        height: 80px;
+      }
+      .logo {
+        width: 100px;
+        height: 80px;
+      }
     }
   </style>
 </head>
@@ -97,6 +131,9 @@
       id="sctLogo"
     />
   </div>
-  <iframe id="vesselMap" frameborder="0"></iframe>
+
+  <div class="iframe-container">
+    <iframe id="vesselMap" frameborder="0"></iframe>
+  </div>
 </body>
 </html>
