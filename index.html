@@ -28,82 +28,71 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: "Montserrat", sans-serif;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
+  body {
+  font-family: "Montserrat", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
-    .instructions {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 16px;
-    font-weight: 400;
-    z-index: 10;
-  }
+.instructions {
+  position: absolute;
+  top: 35px;
+  left: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  z-index: 10;
+}
 
-  .additionalInfo {
-    position: absolute;
-    top: 35px;
-    left: 20px;
-    font-size: 14px;
-    color: #666;
-  }
+.additionalInfo {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 400;
+}
 
-  .logoBox {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    width: 270px;
-    height: 100px;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
+.logoBox {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  background-color: white;
+  padding: 0px;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: 100px;
+}
 
-  .iframe-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+.logo {
+  width: 125px;
+  height: 100px;
+}
 
-  #vesselMap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
+.iframe-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-  @media (max-width: 768px) {
-    .instructions { font-size: 14px; top: 10px; }
-    .additionalInfo { font-size: 12px; top: 35px; }
-    .logoBox { width: 200px; height: 80px; }
-  }
-</style>
+#iframeMap {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
-<body>
-  <div class="instructions">Select your Client Ref and Corresponding IMO to Track Vessel</div>
-  <div class="additionalInfo">If Vessel not within Terrestrial AIS Range, tracking may be outdated</div>
-  <div class="logoBox">
-    <img src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true" 
-         alt="SCT Logo" style="width:125px; height:100px;">
-  </div>
-
-  <div class="iframe-container">
-    <iframe id="vesselMap" frameborder="0"></iframe>
-  </div>
-</body>
+@media (max-width: 768px) {
+  .instructions { font-size: 14px; top: 30px; }
+  .additionalInfo { font-size: 12px; top: 55px; }
+  .logoBox { width: 200px; height: 80px; }
+  .logo { width: 100px; height: 80px; }
+}
