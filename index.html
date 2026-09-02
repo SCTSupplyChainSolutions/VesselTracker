@@ -10,19 +10,35 @@
       const trimmed = imo.trim().toLowerCase();
       return trimmed !== "" && trimmed !== "null" && trimmed !== "undefined";
     }
-
     window.onload = function () {
       const urlParams = new URLSearchParams(window.location.search);
       const imo = urlParams.get("imo");
       const iframe = document.getElementById("vesselMap");
+      const container = document.querySelector(".iframe-container");
+
+      // VesselFinder's aismap endpoint requires width/height/names to be
+      // present in the query string or it returns "Bad request" - it does
+      // not just rely on the iframe tag's own width/height/CSS.
+      const w = Math.max(Math.round(container.clientWidth), 1) || 800;
+      const h = Math.max(Math.round(container.clientHeight), 1) || 600;
+
+      const params = new URLSearchParams();
+      params.set("width", w);
+      params.set("height", h);
+      params.set("names", "true");
 
       if (isValidIMO(imo)) {
-        iframe.src = "https://www.vesselfinder.com/aismap?imo=" + imo + "&v=1";
+        params.set("imo", imo.trim());
+        params.set("zoom", "9");
+        params.set("track", "true");
       } else {
         // Center over South Africa as fallback
-        iframe.src = "https://www.vesselfinder.com/aismap?lat=-29&lon=22.9375&zoom=5&v=1";
+        params.set("lat", "-29");
+        params.set("lon", "22.9375");
+        params.set("zoom", "5");
       }
 
+      iframe.src = "https://www.vesselfinder.com/aismap?" + params.toString();
       iframe.style.display = "block";
     };
   </script>
@@ -37,7 +53,6 @@
       display: flex;
       flex-direction: column;
     }
-
     /* Top white bar containing text and logo */
     .top-bar {
       width: 100%;
@@ -51,43 +66,36 @@
       flex-shrink: 0;
       border-bottom: 1px solid #ccc;
     }
-
     .top-bar .text-container {
       display: flex;
       flex-direction: column;
     }
-
     .instructions {
       font-size: 16px;
       font-weight: 600;
       color: #333;
       margin: 0 0 10px 0;
     }
-
     .additionalInfo {
       font-size: 14px;
       font-weight: 400;
       color: #666;
       margin: 0;
     }
-
     .logoBox img {
       width: 125px;
       height: auto;
     }
-
     .iframe-container {
       flex: 1; /* fill remaining viewport */
       width: 100%;
       position: relative;
     }
-
     #vesselMap {
       width: 100%;
       height: 100%;
       border: none;
     }
-
     @media (max-width: 768px) {
       .instructions { font-size: 14px; }
       .additionalInfo { font-size: 12px; }
@@ -105,7 +113,6 @@
       <img src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true" alt="SCT Logo" />
     </div>
   </div>
-
   <div class="iframe-container">
     <iframe id="vesselMap" frameborder="0"></iframe>
   </div>
