@@ -4,44 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SCT Vessel Tracker</title>
-  <script type="text/javascript">
-    function isValidIMO(imo) {
-      if (typeof imo !== "string") return false;
-      const trimmed = imo.trim().toLowerCase();
-      return trimmed !== "" && trimmed !== "null" && trimmed !== "undefined";
-    }
-    window.onload = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const imo = urlParams.get("imo");
-      const iframe = document.getElementById("vesselMap");
-      const container = document.querySelector(".iframe-container");
-
-      // VesselFinder's aismap endpoint requires width/height/names to be
-      // present in the query string or it returns "Bad request" - it does
-      // not just rely on the iframe tag's own width/height/CSS.
-      const w = Math.max(Math.round(container.clientWidth), 1) || 800;
-      const h = Math.max(Math.round(container.clientHeight), 1) || 600;
-
-      const params = new URLSearchParams();
-      params.set("width", w);
-      params.set("height", h);
-      params.set("names", "true");
-
-      if (isValidIMO(imo)) {
-        params.set("imo", imo.trim());
-        params.set("zoom", "9");
-        params.set("track", "true");
-      } else {
-        // Center over South Africa as fallback
-        params.set("lat", "-29");
-        params.set("lon", "22.9375");
-        params.set("zoom", "5");
-      }
-
-      iframe.src = "https://www.vesselfinder.com/aismap?" + params.toString();
-      iframe.style.display = "block";
-    };
-  </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -91,10 +53,14 @@
       width: 100%;
       position: relative;
     }
-    #vesselMap {
-      width: 100%;
-      height: 100%;
+    /* aismap.js writes its own iframe here - stretch it to fill this box */
+    .iframe-container iframe {
+      width: 100% !important;
+      height: 100% !important;
       border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
     @media (max-width: 768px) {
       .instructions { font-size: 14px; }
@@ -113,8 +79,45 @@
       <img src="https://github.com/SCTSupplyChainSolutions/VesselTracker/blob/main/SCT%20Logo.jpg?raw=true" alt="SCT Logo" />
     </div>
   </div>
-  <div class="iframe-container">
-    <iframe id="vesselMap" frameborder="0"></iframe>
+  <div class="iframe-container" id="vesselMapContainer">
+    <script type="text/javascript">
+      // VesselFinder only supports embedding via their own aismap.js loader
+      // (see https://www.vesselfinder.com/embed) - it reads these globals
+      // and injects its own iframe with the internal parameters (fleet,
+      // store_pos, ra, etc.) that the aismap endpoint requires. Hand-building
+      // the iframe src ourselves omits those and the endpoint returns
+      // "Bad request" (HTTP 400).
+      function isValidIMO(imo) {
+        if (typeof imo !== "string") return false;
+        var trimmed = imo.trim().toLowerCase();
+        return trimmed !== "" && trimmed !== "null" && trimmed !== "undefined";
+      }
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var imoParam = urlParams.get("imo");
+
+      // .top-bar is already in the DOM at this point (it's earlier in the
+      // document), so its rendered height can be measured now to size the
+      // map for the remaining viewport space.
+      var topBar = document.querySelector(".top-bar");
+      var availableHeight = window.innerHeight - (topBar ? topBar.offsetHeight : 90);
+      if (!availableHeight || availableHeight < 200) availableHeight = 400;
+
+      window.width = "100%";
+      window.height = String(Math.round(availableHeight));
+      window.names = true;
+
+      if (isValidIMO(imoParam)) {
+        window.imo = imoParam.trim();
+        window.show_track = true;
+      } else {
+        // Center over South Africa as fallback
+        window.latitude = "-29.00";
+        window.longitude = "22.9375";
+        window.zoom = "5";
+      }
+    </script>
+    <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
   </div>
 </body>
 </html>
